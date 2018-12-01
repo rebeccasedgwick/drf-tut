@@ -4,6 +4,7 @@ from snippets.serializers import SnippetSerializer, UserSerializer
 from rest_framework import permissions, renderers, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from snippets.permissions import IsOwnerOrReadOnly
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -15,7 +16,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          permissions.IsOwnerOrReadOnly)
+                          IsOwnerOrReadOnly)
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):

@@ -6,6 +6,6 @@ router = DefaultRouter()
 router.register(r'snippets', views.SnippetViewSet)
 router.register(r'users', views.UserViewSet)
 
-urlpatterns = format_suffix_patterns([
+urlpatterns = (
     path('', include(router.urls)),
-])
+)
